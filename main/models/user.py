@@ -3,6 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    """Расширенная модель пользователя с ролями"""
     class Roles(models.TextChoices):
         DEVELOPER = "developer"
         MANAGER = "manager"

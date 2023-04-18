@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Tag(models.Model):
+    """Модель Тегов"""
     name = models.CharField(max_length=50, verbose_name="tag")
 
     class Meta:

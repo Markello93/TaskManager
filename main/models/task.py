@@ -4,6 +4,7 @@ from .user import User
 
 
 class Task(models.Model):
+    """Модель задач"""
     class Status(models.TextChoices):
         PLANNED = "planned"
         IN_PROGRESS = "in_progress"
