@@ -5,40 +5,28 @@ from .models import Tag
 from .models import Task
 
 
-class TaskAdmin(admin.ModelAdmin):
-    list_display = (
-        'pk',
-        'name',
-        'status',
-        'author',
-        'pub_date',
-    )
-    search_fields = (
-        'name',
-        'tag',
-        'pub_date',
-    )
-    list_filter = (
-        'name',
-        'tag',
-        'pub_date',
-    )
+class TaskManagerAdminSite(admin.AdminSite):
+    pass
 
 
+task_manager_admin_site = TaskManagerAdminSite(name="Task manager admin")
+
+
+@admin.register(Tag, site=task_manager_admin_site)
 class TagAdmin(admin.ModelAdmin):
-    list_display = (
-        'pk',
-        'name',
-    )
-    search_fields = (
-        'name',
-    )
-    list_filter = (
-        'name',
-    )
-    empty_value_display = '-пусто-'
+    pass
 
 
-admin.site.register(User, UserAdmin)
+@admin.register(Task, site=task_manager_admin_site)
+class TaskAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(User, site=task_manager_admin_site)
+class MainUserAdmin(UserAdmin):
+    list_display = ['username', 'email', 'role']
+
+
+admin.site.register(User, MainUserAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Task, TaskAdmin)
