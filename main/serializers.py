@@ -31,7 +31,7 @@ class TagSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     assigned_to = UserSerializer()
     creator = UserSerializer()
-    tags = TagSerializer()
+    tags = TagSerializer(many=True)
 
     class Meta:
         model = Task
@@ -45,4 +45,9 @@ class TaskSerializer(serializers.ModelSerializer):
             "name",
             "description",
         )
-        read_only_fields = ("id",)
+        read_only_fields = (
+            "id",
+            "assigned_to",
+            "creator",
+            "tags",
+        )
